@@ -23,10 +23,20 @@ link_file() {
 
 # ─── Homebrew ────────────────────────────────────────────────────────────────
 
+setup_brew_env() {
+    if [ -x /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [ -x /usr/local/bin/brew ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    elif [ -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
+}
+
 if ! command -v brew &>/dev/null; then
     info "Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv 2>/dev/null || /usr/local/bin/brew shellenv)"
+    setup_brew_env
 else
     ok "Homebrew already installed"
 fi
@@ -54,10 +64,14 @@ for pkg in "${BREW_FORMULAE[@]}"; do
     brew list "$pkg" &>/dev/null || brew install "$pkg"
 done
 
-info "Installing brew casks..."
-for cask in "${BREW_CASKS[@]}"; do
-    brew list --cask "$cask" &>/dev/null || brew install --cask "$cask"
-done
+if [[ "$(uname)" == "Darwin" ]]; then
+    info "Installing brew casks..."
+    for cask in "${BREW_CASKS[@]}"; do
+        brew list --cask "$cask" &>/dev/null || brew install --cask "$cask"
+    done
+else
+    info "Skipping casks (macOS only)"
+fi
 
 ok "Brew packages installed"
 
