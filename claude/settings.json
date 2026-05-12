@@ -1,0 +1,23 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "defaultMode": "default"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "medium",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim",
+  "preferredNotifChannel": "iterm2_with_bell",
+  "voiceEnabled": true
+}

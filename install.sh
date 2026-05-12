@@ -142,6 +142,38 @@ link_file "$DOTFILES_DIR/git/.gitconfig"     "$HOME/.gitconfig"
 mkdir -p "$HOME/.config/git"
 link_file "$DOTFILES_DIR/git/.config/git/ignore" "$HOME/.config/git/ignore"
 
+# ─── AI Rules (Claude Code + Cursor) ────────────────────────────────────────
+
+info "Setting up ai-rules..."
+link_file "$DOTFILES_DIR/config/ai-rules" "$HOME/.config/ai-rules"
+mkdir -p "$HOME/.claude/rules" "$HOME/.cursor/rules"
+bash "$DOTFILES_DIR/config/ai-rules/setup.sh"
+ok "ai-rules symlinks created"
+
+# ─── Claude Code ────────────────────────────────────────────────────────────
+
+if ! command -v claude &>/dev/null; then
+    warn "claude CLI not found. Download from: https://claude.ai/download"
+    warn "After install, re-run this script to symlink configs and install plugins."
+else
+    ok "claude CLI found: $(claude --version 2>/dev/null | head -1)"
+
+    info "Symlinking Claude config..."
+    mkdir -p "$HOME/.claude"
+    link_file "$DOTFILES_DIR/claude/CLAUDE.md"    "$HOME/.claude/CLAUDE.md"
+    link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+
+    info "Installing Claude plugins..."
+    CLAUDE_PLUGINS=(
+        superpowers@claude-plugins-official
+        ralph-loop@claude-plugins-official
+        pyright-lsp@claude-plugins-official
+    )
+    for plugin in "${CLAUDE_PLUGINS[@]}"; do
+        claude plugin install "$plugin" -s user && ok "Installed $plugin" || warn "Failed to install $plugin (may already be installed)"
+    done
+fi
+
 # ─── Post-install ────────────────────────────────────────────────────────────
 
 info "LazyVim plugins will bootstrap on first nvim launch."
