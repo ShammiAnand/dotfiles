@@ -1,0 +1,9 @@
+{
+  "name": "engineering-skills",
+  "description": "Personal engineering skills: grill-me, tdd, debugging, prototyping, and more",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shammi Anand"
+  },
+  "license": "MIT"
+}
