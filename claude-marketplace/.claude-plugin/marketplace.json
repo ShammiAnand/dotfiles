@@ -1,0 +1,23 @@
+{
+    "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+    "name": "local",
+    "description": "Personal local marketplace",
+    "owner": {
+        "name": "shammianand"
+    },
+    "plugins": [
+        {
+            "name": "mattpocock-skills",
+            "description": "Engineering and productivity skills: tdd, grill-me, to-prd, triage, prototype, zoom-out, and more",
+            "author": {
+                "name": "Matt Pocock"
+            },
+            "source": {
+                "source": "git-subdir",
+                "url": "https://github.com/mattpocock/skills.git",
+                "path": ".",
+                "ref": "main"
+            }
+        }
+    ]
+}

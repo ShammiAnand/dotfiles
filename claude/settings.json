@@ -9,7 +9,8 @@
   "enabledPlugins": {
     "superpowers@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true
+    "pyright-lsp@claude-plugins-official": true,
+    "mattpocock-skills@local": true
   },
   "effortLevel": "medium",
   "voice": {

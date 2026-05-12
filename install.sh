@@ -157,11 +157,16 @@ else
     link_file "$DOTFILES_DIR/claude/CLAUDE.md"     "$HOME/.claude/CLAUDE.md"
     link_file "$DOTFILES_DIR/claude/settings.json"  "$HOME/.claude/settings.json"
 
+    info "Setting up local marketplace..."
+    link_file "$DOTFILES_DIR/claude-marketplace" "$HOME/.claude-local-marketplace"
+    claude plugin marketplace add "$HOME/.claude-local-marketplace" --scope user 2>/dev/null || warn "local marketplace already added"
+
     info "Installing Claude plugins..."
     CLAUDE_PLUGINS=(
         superpowers@claude-plugins-official
         ralph-loop@claude-plugins-official
         pyright-lsp@claude-plugins-official
+        mattpocock-skills@local
     )
     for plugin in "${CLAUDE_PLUGINS[@]}"; do
         claude plugin install "$plugin" -s user && ok "Installed $plugin" || warn "Failed to install $plugin (may already be installed)"
