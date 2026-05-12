@@ -7,15 +7,15 @@
     },
     "plugins": [
         {
-            "name": "mattpocock-skills",
-            "description": "Engineering and productivity skills: tdd, grill-me, to-prd, triage, prototype, zoom-out, and more",
+            "name": "engineering-skills",
+            "description": "Personal engineering skills: grill-me, tdd, debugging, prototyping, and more",
             "author": {
-                "name": "Matt Pocock"
+                "name": "shammianand"
             },
             "source": {
                 "source": "git-subdir",
-                "url": "https://github.com/mattpocock/skills.git",
-                "path": ".",
+                "url": "https://github.com/ShammiAnand/dotfiles.git",
+                "path": "agents",
                 "ref": "main"
             }
         }
